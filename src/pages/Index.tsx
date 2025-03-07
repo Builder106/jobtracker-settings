@@ -1,12 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { SettingsHeader } from '@/components/SettingsHeader';
+import { DefaultValuesSettings } from '@/components/settings/DefaultValuesSettings';
+import { NotificationSettings } from '@/components/settings/NotificationSettings';
+import { JobSitesSettings } from '@/components/settings/JobSitesSettings';
+import { ApiConfigSettings } from '@/components/settings/ApiConfigSettings';
+import { DataManagementSettings } from '@/components/settings/DataManagementSettings';
+import { SettingsFooter } from '@/components/SettingsFooter';
+import { useEffect } from 'react';
 
 const Index = () => {
+  // Apply staggered animation for cards
+  useEffect(() => {
+    const cards = document.querySelectorAll('.settings-card');
+    cards.forEach((card, index) => {
+      const delay = 0.1 * index;
+      (card as HTMLElement).style.animationDelay = `${delay}s`;
+    });
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <SettingsHeader />
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="space-y-6">
+          <ApiConfigSettings />
+          <NotificationSettings />
+          <JobSitesSettings />
+        </div>
+        
+        <div className="space-y-6">
+          <DefaultValuesSettings />
+          <DataManagementSettings />
+        </div>
       </div>
+      
+      <SettingsFooter />
     </div>
   );
 };
